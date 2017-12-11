@@ -1,4 +1,16 @@
 package org.sergei.design_patterns.replace_if_else.condition;
 
-public class YoungCondition {
+import org.sergei.design_patterns.replace_if_else.Applicant;
+
+public class YoungCondition implements Condition<Applicant> {
+    private final Condition condition;
+
+    public YoungCondition(Condition condition) {
+        this.condition = condition;
+    }
+
+    @Override
+    public Boolean isSatisfied(Applicant applicant) {
+        return this.condition.isSatisfied(applicant) && applicant.getAge() < 26;
+    }
 }

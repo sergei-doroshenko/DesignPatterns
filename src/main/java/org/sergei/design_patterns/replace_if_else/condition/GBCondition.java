@@ -2,20 +2,15 @@ package org.sergei.design_patterns.replace_if_else.condition;
 
 import org.sergei.design_patterns.replace_if_else.Applicant;
 
-public class GBCondition implements ApplicantCondition {
-    private final Applicant applicant;
+public class GBCondition implements Condition<Applicant> {
+    private final Condition<Applicant> condition;
 
-    public GBCondition(Applicant applicant) {
-        this.applicant = applicant;
+    public GBCondition(Condition condition) {
+        this.condition = condition;
     }
 
     @Override
-    public Boolean isSatisfied() {
-        return applicant.getCountry().equals("GB");
-    }
-
-    @Override
-    public Applicant getApplicant() {
-        return applicant;
+    public Boolean isSatisfied(Applicant applicant) {
+        return this.condition.isSatisfied(applicant) && ("GB").equals(applicant.getCountry());
     }
 }

@@ -29,43 +29,45 @@ public class ApplicantContext {
     }
 
     public ApplicantStrategy getApplicantStrategy() {
+        if (strategyMap.isEmpty()) {
+            init();
+        }
 
-        if (new SeniorCondition(
+        for (Condition condition : strategyMap.keySet()) {
+            if (condition.isSatisfied(applicant)) {
+                return strategyMap.get(condition);
+            }
+        }
+
+        return new DefaultStrategy();
+    }
+
+    private void init() {
+
+        strategyMap.put(new SeniorCondition(
                 new ExpertCondition(
                         new DeveloperCondition(
-                                new USCondition(applicant))))
-                .isSatisfied()
-                ) {
-            return new UsSeniorExpertDeveloperStrategy(applicant);
-        }
+                                new USCondition(Condition.ALWAYS_TRUE)))),
+            new UsSeniorExpertDeveloperStrategy());
 
-        if (new SeniorCondition(
+        strategyMap.put(new SeniorCondition(
                 new AdvancedCondition(
                         new DeveloperCondition(
-                                new USCondition(applicant))))
-                .isSatisfied()
-                ) {
-            return new UsSeniorAdvancedDeveloperStrategy(applicant);
-        }
+                                new USCondition(Condition.ALWAYS_TRUE)))),
+            new UsSeniorAdvancedDeveloperStrategy());
 
-        if (new SeniorCondition(
+
+        strategyMap.put(new SeniorCondition(
                 new NewbieCondition(
                         new DeveloperCondition(
-                                new USCondition(applicant))))
-                .isSatisfied()
-                ) {
-            return new UsSeniorNewbieDeveloperStrategy(applicant);
-        }
+                                new USCondition(Condition.ALWAYS_TRUE)))),
+            new UsSeniorNewbieDeveloperStrategy());
 
-        if (new SeniorCondition(
+
+        strategyMap.put(new SeniorCondition(
                 new AdvancedCondition(
                         new TesterCondition(
-                                new GBCondition(applicant))))
-                .isSatisfied()
-                ) {
-            return new GbSeniorAdvancedTesterStrategy(applicant);
-        }
-
-        return new DefaultStrategy(applicant);
+                                new GBCondition(Condition.ALWAYS_TRUE)))),
+            new GbSeniorAdvancedTesterStrategy());
     }
 }

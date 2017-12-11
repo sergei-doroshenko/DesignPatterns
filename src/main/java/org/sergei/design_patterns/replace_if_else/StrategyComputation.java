@@ -10,6 +10,6 @@ public class StrategyComputation {
     }
 
     public Long compute() {
-        return new ApplicantContext(applicant).getApplicantStrategy().compute();
+        return new ApplicantContext(applicant).getApplicantStrategy().compute(applicant);
     }
 }

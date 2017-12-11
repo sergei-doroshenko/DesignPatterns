@@ -10,12 +10,12 @@ public class Logger {
     }
 
     // nested class
-    public static class LoggerHolder {
+    private static class LoggerHolder {
         static {
             System.err.println("LoggerHolder class init.");
         }
         // static field to hold outer class instance
-        public static Logger logger = new Logger();
+        private static Logger logger = new Logger();
 
     }
 

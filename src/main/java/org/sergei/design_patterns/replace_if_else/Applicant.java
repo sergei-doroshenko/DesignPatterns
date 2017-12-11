@@ -8,11 +8,18 @@ public class Applicant {
     private final long amount;
 
     public Applicant(int age, int experience, String country, String profession, long amount) {
+        validateArguments(age, experience, country, profession, amount);
         this.age = age;
         this.experience = experience;
         this.country = country;
         this.profession = profession;
         this.amount = amount;
+    }
+
+    private void validateArguments(int age, int experience, String country, String profession, long amount) {
+        if (age <= 0 || experience <= 0 || country == null || profession == null || amount <= 0) {
+            throw new IllegalArgumentException("Some applicant arguments are invalid (null or 0).");
+        }
     }
 
     public int getAge() {

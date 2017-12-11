@@ -2,20 +2,15 @@ package org.sergei.design_patterns.replace_if_else.condition;
 
 import org.sergei.design_patterns.replace_if_else.Applicant;
 
-public class SeniorCondition implements ApplicantCondition {
-    private final ApplicantCondition condition;
+public class SeniorCondition implements Condition<Applicant> {
+    private final Condition<Applicant> condition;
 
-    public SeniorCondition(ApplicantCondition condition) {
+    public SeniorCondition(Condition condition) {
         this.condition = condition;
     }
 
     @Override
-    public Boolean isSatisfied() {
-        return condition.isSatisfied() && getApplicant().getAge() > 30;
-    }
-
-    @Override
-    public Applicant getApplicant() {
-        return condition.getApplicant();
+    public Boolean isSatisfied(Applicant applicant) {
+        return this.condition.isSatisfied(applicant) && applicant.getAge() > 30;
     }
 }
