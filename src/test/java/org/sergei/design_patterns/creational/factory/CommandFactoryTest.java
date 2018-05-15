@@ -13,15 +13,15 @@ public class CommandFactoryTest {
 
         BaseCommand baseCommand = factory.getCommand(CommandFactory.Type.BASE);
         String baseResult = executor.execute(baseCommand);
-        assertEquals("Execute: " + BaseCommand.class.getName(), baseResult);
+        assertEquals("Execute B: " + BaseCommand.class.getName(), baseResult);
 
         BaseCommand filterCommand = factory.getCommand(CommandFactory.Type.FILTER);
         String filterResult = executor.execute(filterCommand);
-        assertEquals("Execute: " + FilterCommand.class.getName(), filterResult);
+        assertEquals("Execute F: " + FilterCommand.class.getName(), filterResult);
 
         BaseCommand dynamicCommand = factory.getCommand(CommandFactory.Type.DYNAMIC);
         String dynamicResult = executor.execute(dynamicCommand);
-        assertEquals("Execute: " + DynamicCommand.class.getName(), dynamicResult);
+        assertEquals("Execute D: " + DynamicCommand.class.getName(), dynamicResult);
 
     }
 
